@@ -1,0 +1,13 @@
+doctype 5
+html(lang="en")
+  head
+    title pageTitle
+  body
+    h1 reading
+    form(action="/getUrl",method="post")
+      div url:
+        input#urlFrame(type="text", name="url", size="100")
+        input(type="submit", onclick="makeRequest(url)")
+
+    iframe#frame1(src="/page.html", width="80%", height="600")
+    script(src="/js/sync.js")

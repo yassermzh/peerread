@@ -1,0 +1,26 @@
+{
+  "name": "peerread",
+  "version": "0.0.0",
+  "description": "Reading a page with a friend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yassermzh/peerread.git"
+  },
+  "author": "Yasser Mzadeh",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/yassermzh/peerread/issues"
+  },
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.5",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-copy": "~0.4.1"
+  }
+}
