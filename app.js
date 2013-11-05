@@ -30,5 +30,6 @@ app.use(express.static(__dirname+'/public/'));
 
 require('./app/route')(app);
 
-app.listen(4004);
-console.log('server is listening on port 4004');
+var port = process.env.PORT || 4004;
+app.listen(port);
+console.log('server is listening on port '+port);
