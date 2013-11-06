@@ -3,7 +3,6 @@
 
 var express = require('express');
 
-
 var app = express();
 
 // development only
@@ -16,7 +15,6 @@ app.configure('production', function(){
   app.set('db uri', 'n.n.n.n/prod');
 })
 
-
 app.configure(function(){
 
   app.set('views', __dirname + '/app/views');
@@ -25,6 +23,7 @@ app.configure(function(){
   app.use(express.bodyParser());
 
 });
+
 console.log(__dirname);
 app.use(express.static(__dirname+'/public/'));
 

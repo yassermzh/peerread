@@ -23,6 +23,7 @@
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-copy": "~0.4.1",
     "express": "~3.4.4",
-    "request": "~2.27.0"
+    "request": "~2.27.0",
+    "jade": "~0.35.0"
   }
 }
