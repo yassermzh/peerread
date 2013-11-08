@@ -17,13 +17,19 @@
     "url": "https://github.com/yassermzh/peerread/issues"
   },
   "dependencies": {
+    "express": "~3.4.4",
+    "request": "~2.27.0",
+    "jade": "~0.35.0",
+    "websocket": "~1.0.8",
+    "underscore": "~1.5.2"
+  },
+  "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.5",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-copy": "~0.4.1",
-    "express": "~3.4.4",
-    "request": "~2.27.0",
-    "jade": "~0.35.0"
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-shell": "~0.5.0"
   }
 }

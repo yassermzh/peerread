@@ -2,7 +2,7 @@
 'use strict';
 
 var express = require('express');
-
+var http = require('http');
 var app = express();
 
 // development only
@@ -30,5 +30,10 @@ app.use(express.static(__dirname+'/public/'));
 require('./app/route')(app);
 
 var port = process.env.PORT || 4004;
-app.listen(port);
+
+var server = http.createServer(app);
+require('./app/ws-server')(server);
+server.listen(port);
+
+// app.listen(port);
 console.log('server is listening on port '+port);
