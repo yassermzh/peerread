@@ -46,6 +46,7 @@ module.exports = function(server){
 	});
 	connection.on('close', function(reasonCode, description) {
             console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+            console.log('found id=%s', (cliet=findClient(connection)) ? client.id : 'not found');
 	    removeClient(connection);
 	});
     });
@@ -57,6 +58,7 @@ module.exports = function(server){
     }
     function broadcast(data) {
 	// console.log('clients#='+clients.length);
+        data.clients=_.keys(clients).length;
 	var msg=JSON.stringify(_.omit(data,'id'));
 	for (var i in clients){
 	    console.log('broadcast: sent to %s, msg=%s',i, msg);
@@ -67,7 +69,7 @@ module.exports = function(server){
     function removeClient(conn){
 	var deleted=false;
 	for(var i in clients){
-	    if(clients[i]===conn){
+	    if(clients[i].conn===conn){
 		delete clients[i];
 		deleted=true;
 		console.log('client removed');
@@ -95,11 +97,12 @@ module.exports = function(server){
 	case 'helo':
 	    // var conns = _.pluck(clients, conn);
 	    clientId++;
-	    clients[clientId]={conn: conn};
+	    clients[clientId]={conn: conn, id: clientId};
  	    data.id = clientId;
 	    unicast(conn, data);
 	    break;
         case 'scroll':
+            // console.log('found id=%s', findClient(conn).id);
 	    broadcast(data);
             break;
 	case 'win-resize':

@@ -25,7 +25,9 @@ function initFrame(){
     var frame = document.getElementsByTagName('iframe')[0];
     frameDoc = frame.contentDocument;
 
-    frame.contentWindow.onscroll = throttlize(syncScroll);
+    // $('iframe').scroll(throttlize(syncScroll));
+    $($('#frame1').contents()).scroll(throttlize(syncScroll));
+    // frame.contentWindow.onscroll = throttlize(syncScroll);
 
     // click events
     // if(frameInited){
@@ -111,15 +113,24 @@ function syncPage() {
 }
 
 function syncScroll (){
-    console.log('scrollY='+frameDoc.body.scrollTop);
-    if(scrollTopSynced != frameDoc.body.scrollTop){
+    console.log('scrollY='+getScrollTop());
+    if(scrollTopSynced != getScrollTop()){
 	sendWS({
             msg: 'scroll',
 	    id: clientId,
-            scrollY: frameDoc.body.scrollTop
+            scrollY: getScrollTop()
 	});
     }
 }
+
+function getScrollTop(){
+    return $('iframe').contents().scrollTop();
+}
+
+function setScrollTop(scrollTop){
+    $('iframe').contents().scrollTop(scrollTop);
+}
+
 
 // function init(){
 //     var iframe=frameDoc.getElementById('frame1');
@@ -153,7 +164,7 @@ function initSync(){
 	    break;
         case 'scroll':
 	    scrollTopSynced = data.scrollY;
-            frameDoc.body.scrollTop=data.scrollY;
+            setScrollTop(data.scrollY);
             break;
 	case 'win-resize':
 	    $('iframe').width(data.frameWidth);
