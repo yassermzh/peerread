@@ -1,17 +1,9 @@
 /* jshint browser:true */
 
-var frame;
-var frameDoc;
+// var frame;
+// var frameDoc;
 var clientId = undefined;
 var scrollTopSynced;
-
-// a note
-// if (location.origin.match(/http:..192.168/)){
-    // var wsServerUrl="ws://192.168.120.144:80/";
-    var wsServerUrl=location.origin.replace(/^http/, 'ws');
-// } else {
-    // var wsServerUrl="ws://peerreadws.herokuapp.com/";
-// }
 
 
 var syncSocket;
@@ -22,8 +14,8 @@ function throttlize(f){
 
 function initFrame(){
     console.log('initFrame called...');
-    var frame = document.getElementsByTagName('iframe')[0];
-    frameDoc = frame.contentDocument;
+    var frame = document.getElementById('frame1');
+    var frameDoc = frame.contentDocument;
 
     // $('iframe').scroll(throttlize(syncScroll));
     $($('#frame1').contents()).scroll(throttlize(syncScroll));
@@ -31,8 +23,8 @@ function initFrame(){
 
     // click events
     // if(frameInited){
-        frameInited=true;
-        console.log('initFrame cont...');
+        // frameInited=true;
+        // console.log('initFrame cont...');
         var links = frameDoc.getElementsByTagName("a");
 
         for (var i=0;i<links.length;i++){
@@ -43,7 +35,7 @@ function initFrame(){
 
 function init(){
     console.log('window init called...');
-    frame = document.getElementsByTagName('iframe')[0];
+    // var frame = document.getElementById('frame1');
     initSync();
     //initFrame();
     $(window).resize(throttlize(syncWinSize));
@@ -124,11 +116,12 @@ function syncScroll (){
 }
 
 function getScrollTop(){
-    return $('iframe').contents().scrollTop();
+    return $('#frame1').contents().scrollTop();
 }
 
 function setScrollTop(scrollTop){
-    $('iframe').contents().scrollTop(scrollTop);
+    $('#frame1').contents().scrollTop(scrollTop);
+    // $('#frame1').contents().find("html,body").animate({ scrollTop: scrollTop },1000);
 }
 
 
@@ -141,8 +134,12 @@ function setScrollTop(scrollTop){
 
 
 function initSync(){
-    // var frame = document.getElementsByTagName('iframe')[0];
-    // var frameDoc = frame.contentDocument;
+    
+    var wsServerUrl
+    if (!window.location.origin)
+	wsServerUrl=window.location.protocol+"//"+window.location.host;
+    else
+	wsServerUrl=location.origin.replace(/^http/, 'ws');
 
     syncSocket = new WebSocket(wsServerUrl, "echo-protocol");
 
@@ -179,13 +176,13 @@ function initSync(){
 }
 
 function loadFrame(){
-    $('iframe').prop('src','./page.html');
+    $('#frame1').prop('src','./page.html');
 }
 
 function syncWinSize(forced){
     winWidth = $(window).width(); 
-    frameWidth = $('iframe').width();
-    console.log('win resize event, winWidth=%s, iframeWidth=',winWidth,frameWidth);
+    // frameWidth = $('#frame1').width();
+    // console.log('win resize event, winWidth=%s, iframeWidth=',winWidth,frameWidth);
     //if(winWidth*0.9<frameWidth || forced==='forced'){
 	sendWS({
 	    msg: 'win-resize',
@@ -205,7 +202,7 @@ function sendWS(data){
 
 //window.onload = init;
 $(window).load(init);
-$('iframe').load(initFrame);
+$('#frame1').load(initFrame);
 //$(document).ready(function(){
 //    document.getElementsByTagName('iframe')[0].onload=initFrame;
 //$("iframe#frame1").load(initFrame);

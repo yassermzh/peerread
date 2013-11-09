@@ -1,0 +1,23 @@
+div.navbar.navbar-inverse.navbar-fixed-top
+    div.navbar-inner
+        div.container
+            a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.brand(href="/")
+                | VulnKB
+            div.nav-collapse.collapse
+                ul.nav
+                    li(ng-class="{ true : 'active', false: ''}[$location.path()=='/']")
+                        a(href="/") Home
+                    li(ng-class="{ true : 'active', false: ''}[$location.path()=='/login']")
+                        //- li(ng-class="{{ $location.path()==='/login' && 'active' || '' }}")
+                        a(href="/logout", ng-show="authService.isLoggedIn()", ng-click="logout()") logout
+                        a(href="/login", ng-show="!authService.isLoggedIn()", ng-click="login()") login
+                ul.nav.pull-right
+                    .navbar-text(ng-show="authService.isLoggedIn()") {{ authService.whoAmI() }} logged in 
+                    //- .navbar-text(ng-show="auth.authenticated") {{ auth.user }} logged in 
+                        
+
+
