@@ -21,7 +21,9 @@
     "request": "~2.27.0",
     "jade": "~0.35.0",
     "websocket": "~1.0.8",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "passport": "~0.1.17",
+    "passport-local": "~0.1.6"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

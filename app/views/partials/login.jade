@@ -1,0 +1,16 @@
+//- .alert
+//-     button.button.close(data-dismiss="alert") &times;
+//-     p {{ message }}
+
+form.form-horizontal
+    .control-group
+        label.control-label(for='inputUsername') Username
+        .controls
+            input#inputUsername(type='text', placeholder='Username', ng-model="credentials.username")
+    .control-group
+        label.control-label(for='inputPassword') Password
+        .controls
+            input#inputPassword(type='password', placeholder='Password', ng-model="credentials.password")
+    .control-group
+        .controls
+            button.btn(type='submit', ng-click="submit(credentials)") Sign in

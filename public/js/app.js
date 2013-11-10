@@ -1,4 +1,4 @@
-var app = angular.module('app',['ngGrid']);
+var app = angular.module('app',[]);
 
 app.run(function ($http,$rootScope,$location){
   window.rootScope = $rootScope;
@@ -159,37 +159,33 @@ app.config(function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);  // to remove # from urls, cause problem with IE<10
 
   $routeProvider
-  .when('/', {
-    controller:'gridCtrl',
-    templateUrl:'/partials/grid'
-  })
-  .when('/carousel', {
-    controller:'testCtrl',
-    templateUrl:'/partials/carousel',
-    resolve: {
-      delay: function($q, $timeout) {
-        var delay = $q.defer();
-        console.log('wait for the promise to get resolved');
-        $timeout(function(){
-          var fuckPack={
-            data: "fuckDataisFuckingFuck",
-            fuck: function(name){return name+" is a fucker...";}
-          };
-          console.log('now resolved...');
-          // delay.resolve(fuckPack);
-          delay.reject(fuckPack);   // in this case the it will not routed to /carousel however the html is fetched
-        }, 3000);
-        return delay.promise;
-      }
-    }
-  })
-  .when('/detail/vuln/:vulnSrc/:vulnId', {
-    controller:'detailViewCtrl',
-    templateUrl:'/partials/detail-view'
-  })
-  .when('/admin', {
-    controller:'adminVulns',
-    templateUrl:'/partials/admin',
+  // .when('/', {
+  //   controller:'home',
+  //   templateUrl:'/partials/login'
+  // })
+  // .when('/carousel', {
+  //   controller:'testCtrl',
+  //   templateUrl:'/partials/carousel',
+  //   resolve: {
+  //     delay: function($q, $timeout) {
+  //       var delay = $q.defer();
+  //       console.log('wait for the promise to get resolved');
+  //       $timeout(function(){
+  //         var fuckPack={
+  //           data: "fuckDataisFuckingFuck",
+  //           fuck: function(name){return name+" is a fucker...";}
+  //         };
+  //         console.log('now resolved...');
+  //         // delay.resolve(fuckPack);
+  //         delay.reject(fuckPack);   // in this case the it will not routed to /carousel however the html is fetched
+  //       }, 3000);
+  //       return delay.promise;
+  //     }
+  //   }
+  // })
+  .when('/letsread', {
+    controller:'letsread',
+    templateUrl:'/partials/letsread',
     resolve: {
       loggedin: function(AuthenticationService){
         return AuthenticationService.checkLoggedin();
@@ -200,12 +196,8 @@ app.config(function($routeProvider, $locationProvider) {
     controller:'login',
     templateUrl: '/partials/login'
   })
-  .when('/stats',{
-    controller:'stats',
-    templateUrl: '/partials/stats',
-  })
   .otherwise({
-    redirectTo:'/'
+    redirectTo:'/login'
   });
 
   
