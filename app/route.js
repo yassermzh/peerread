@@ -37,6 +37,9 @@ module.exports = function (app){
 	});
     });
 
+    app.get('/swa', function(req,res){
+        res.render('swa');
+    });
 
     function prepareBody(body, ph){
 	body=body.replace(/(href|src)=(["'])(((?!http)[\w\/])+)/g, function(e,p0,p1,p2){

@@ -1,4 +1,3 @@
-// var app = angular.module('app',['ngGrid']);
 var app = angular.module('app',['ngGrid']);
 
 app.run(function ($http,$rootScope,$location){
@@ -14,7 +13,7 @@ app.run(function ($http,$rootScope,$location){
 
   // $rootScope.logout = logout;
   // $(window).load(function() {
-  $(".loader").fadeOut("slow");
+  // $(".loader").fadeOut("slow");
 // })
 });
 

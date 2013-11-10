@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div.container
+    div.row
+        div.span11.offset1
+            .alert(ng-show="flash") {{ flash }}
+                button.button.close(data-dismiss="alert") &times;
+
+    div(ng-view)
+
+block footer

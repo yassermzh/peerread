@@ -1,0 +1,84 @@
+
+div.row
+    //- div.btn-toolbar
+    div.btn-group
+        a.btn(ng-href="/") 
+            i.icon-home 
+            span {{ prevVuln && 'Back' || 'Search more' }}
+            //- li(ng-show="nav.prev.url")
+    div.btn-group
+        a.btn(ng-href="{{nav.prev.url}}", ng-show="nav.prev.url", ng-disabled="!nav.prev.en", ng-click="slide('prev')") 
+            i.icon-step-backward 
+            span prev
+        //- li(ng-show="nav.next.url" )
+        a.btn(ng-href="{{nav.next.url}}", ng-show="nav.next.url", ng-disabled="!nav.next.en", ng-click="slide('next')") 
+            i.icon-step-forward 
+            span next
+        //- li
+h1 Vulnenaribilty Details
+div.row.spacer
+    table.table-hover.span8
+        tr
+            td.span2.mydt
+                strong VulnDB
+            td.span6 
+                {{ data.vulndb }}
+                br
+                span(my-vulndb-logo, my-vulndb="{{data.vulndb}}")
+                //- span(my-vulndb-logo my-vulndb="{{vulndbm}}")
+
+        tr
+            td.mydt 
+                strong ID
+            td {{ data.id }}
+        tr(ng-show="data.releaseDate")
+            td.mydt
+                strong Release date
+            td {{ data.releaseDate | date:'medium' }}
+        tr(ng-show="data.originURL")
+            td.mydt
+                strong Origin URL
+            td 
+                a(ng-href="{{ data.originURL }}") {{ data.originURL }}
+        tr(ng-show="data.title")
+            td.mydt
+                strong Title
+            td {{ data.title }}
+        tr(ng-show="data.description") 
+            td.mydt
+                strong Description
+            td {{ data.description }}
+        tr(ng-show="data.solution") 
+            td.mydt
+                strong Solution
+            td {{ data.solution}}
+        tr(ng-show="data.cvss >= 0") 
+            td.mydt
+                strong CVSS
+            td {{ data.cvss }}
+        tr(ng-show="data.impact") 
+            td.mydt
+                strong Impact
+            td {{ data.impact}}
+        tr(ng-show="data.products")
+            td.mydt
+                strong Products
+            td
+                ul
+                    li(ng-repeat="product in data.products")
+                        span(ng-show="product.vendor")
+                            {{ product.vendor }}::{{ product.product }}::{{ product.version }}
+                        span(ng-show="product.general")
+                            {{ product.general }}
+        tr(ng-show="data.refs")
+            td.mydt
+                strong References
+            td
+                ul
+                    li(ng-repeat="ref in data.refs")
+                        span(ng-show="ref.url")
+                            {{ ref.title }} :
+                            br 
+                            a(ng-href="{{ ref.url }}") {{ ref.value }}
+                        span(ng-show="ref.general")
+                            {{ ref.general }}
